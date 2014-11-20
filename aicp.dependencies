@@ -30,6 +30,11 @@
     "branch":      "cm-12.0"
   },
   {
+    "repository":  "CyanogenMod/android_hardware_samsung",
+    "target_path": "hardware/samsung",
+    "branch":      "cm-12.0"
+  },
+  {
     "repository":  "CyanogenMod/android_hardware_qcom_fm",
     "target_path": "hardware/qcom/fm",
     "branch":      "cm-12.0"
