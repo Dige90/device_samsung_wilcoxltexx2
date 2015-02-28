@@ -1,4 +1,4 @@
-# Copyright (C) 2013 The CyanogenMod Project
+# Copyright (C) 2014 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,19 +20,75 @@
 # definition file).
 #
 
-# Inherit from common serrano
--include device/samsung/serrano-common/BoardConfigCommon.mk
+# inherit from common msm8930
+-include device/samsung/msm8930-common/BoardConfigCommon.mk
 
-# Assert
-TARGET_OTA_ASSERT_DEVICE := serranolte,serranoltebmc,serranoltektt,serranoltexx
+TARGET_SPECIFIC_HEADER_PATH := device/samsung/wilcoxltexx/include
 
 # Kernel
-TARGET_KERNEL_VARIANT_CONFIG := msm8930_serrano_eur_lte_defconfig
+BOARD_KERNEL_CMDLINE         := androidboot.hardware=qcom user_debug=23 androidboot.bootdevice=msm_sdcc.1
+BOARD_KERNEL_BASE            := 0x80200000
+BOARD_MKBOOTIMG_ARGS         := --ramdisk_offset 0x02000000
+BOARD_KERNEL_PAGESIZE        := 2048
+TARGET_KERNEL_SOURCE         := kernel/samsung/msm8930
+TARGET_KERNEL_CONFIG         := cyanogen_cane_defconfig
+TARGET_KERNEL_VARIANT_CONFIG := msm8930_cane_wilcox_eur_lte_defconfig
+TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
+
+TARGET_BOOTLOADER_BOARD_NAME := MSM8960
+
+# Assert
+TARGET_OTA_ASSERT_DEVICE := wilcoxlte,wilcoxltexx,SM-G3815
+
+# Recovery
+TARGET_RECOVERY_FSTAB := device/samsung/wilcoxltexx/rootdir/fstab.qcom
+COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
+
+# Partition sizes
+TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_BOOTIMAGE_PARTITION_SIZE := 10485760
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 10485760
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1761607680
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 5616139264
+BOARD_FLASH_BLOCK_SIZE := 131072
+
+# Bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/wilcoxltexx/bluetooth
+
+# Custom RIL class
+BOARD_RIL_CLASS := ../../../device/samsung/wilcoxltexx/ril/
 
 # NFC
 BOARD_HAVE_NFC := true
+#BOARD_NFC_CHIPSET := pn547
 
-# Vendor Init
-TARGET_UNIFIED_DEVICE := true
-TARGET_INIT_VENDOR_LIB := libinit_serranolte
-TARGET_LIBINIT_DEFINES_FILE := device/samsung/serranoltexx/init/init_serranolte.c
+# Audio
+AUDIO_FEATURE_ENABLED_INCALL_MUSIC := false
+AUDIO_FEATURE_ENABLED_COMPRESS_VOIP := false
+BOARD_HAVE_SAMSUNG_AUDIO := true
+BOARD_USES_LEGACY_ALSA_AUDIO := true
+BOARD_USES_FLUENCE_INCALL := true
+BOARD_USES_FLUENCE_FOR_VOIP := true
+BOARD_USES_SEPERATED_AUDIO_INPUT := true
+BOARD_USES_SEPERATED_VOICE_SPEAKER := true
+QCOM_CSDCLIENT_ENABLED := false
+
+# Use seperate devices for VOIP
+BOARD_USES_SEPERATED_VOIP := true
+
+# Charger
+BOARD_CHARGER_ENABLE_SUSPEND := true
+BOARD_CHARGER_RES :=
+
+# Enable QCOM FM feature
+AUDIO_FEATURE_ENABLED_FM := true
+QCOM_FM_ENABLED := true
+BOARD_USES_SEPERATED_FM := true
+
+# Camera
+TARGET_NEED_DISABLE_AUTOFOCUS := true
+TARGET_NEED_DISABLE_FACE_DETECTION := true
+TARGET_NEED_DISABLE_FACE_DETECTION_BOTH_CAMERAS := true
+
+# Build our own PowerHAL
+TARGET_POWERHAL_VARIANT :=
