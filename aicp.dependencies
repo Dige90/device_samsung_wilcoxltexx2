@@ -1,16 +1,16 @@
 [
   {
-    "repository":  "AICP/proprietary_vendor_samsung",
+    "repository":  "proprietary_vendor_samsung",
     "target_path": "vendor/samsung",
     "branch":      "lp5.0"
   },
   {
-    "repository":  "AICP/device_samsung_qcom-common",
+    "repository":  "device_samsung_qcom-common",
     "target_path": "device/samsung/qcom-common",
     "branch":      "lp5.0"
   },
   {
-    "repository":  "AICP/device_samsung_serrano-common",
+    "repository":  "device_samsung_serrano-common",
     "target_path": "device/samsung/serrano-common",
     "branch":      "lp5.0"
   },
