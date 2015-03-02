@@ -2,6 +2,6 @@
 
 set -e
 
-export DEVICE=serrano-common
+export DEVICE=wilcox-common
 export VENDOR=samsung
 ./../$DEVICE/extract-files.sh $@
